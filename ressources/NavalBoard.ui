@@ -1,0 +1,8 @@
+<?xml vertion="1.0" encoding="UTF-8"?>
+<interface>
+    <template class="NavalBoard" parent="GtkDrawingArea" >
+        <property name="width_request">400</property>
+        <property name="height_request">400</property>
+        <signal name="draw" handler="on_draw"/>
+    </template>
+</interface>
