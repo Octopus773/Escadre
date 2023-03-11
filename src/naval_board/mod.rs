@@ -1,7 +1,7 @@
 mod imp;
-use gtk::prelude::*;
 use glib::Object;
-use gtk::{glib, cairo};
+use gtk::prelude::*;
+use gtk::{cairo, glib};
 
 glib::wrapper! {
     pub struct NavalBoard(ObjectSubclass<imp::NavalBoard>)
@@ -13,7 +13,7 @@ impl NavalBoard {
     pub fn new() -> Self {
         let nb: NavalBoard = Object::builder().build();
         nb.set_size_request(300, 300);
-        DrawingAreaExtManual::set_draw_func(&nb, |_d, c, w, h| NavalBoard::draw( c, w, h));
+        DrawingAreaExtManual::set_draw_func(&nb, |_d, c, w, h| NavalBoard::draw(c, w, h));
         nb
     }
 
