@@ -30,10 +30,43 @@ fn build_ui(application: &Application) {
         .build();
 
     let drawing_area = DrawingArea::builder()
+        .margin_bottom(20)
+        .margin_top(20)
+        .margin_start(20)
+        .margin_end(20)
         .build();
 
     drawing_area.connect_resize(|a, b, c| resize_drawing_area(a, b, c));
     drawing_area.connect_realize(|d| realize_drawing_area(d));
+    
+    let gesture = gtk::GestureClick::new();
+
+    gesture.set_button(gtk::gdk::ffi::GDK_BUTTON_SECONDARY as u32);
+
+    gesture.connect_pressed(|g, n, x, y| {
+        println!("Gesture pressed");
+        println!("Details: {} {} {} {}", g, n, x, y);
+    });
+
+    gesture.connect_released(|g, n, x, y| {
+        println!("Gesture released");
+        println!("Details: {} {} {} {}", g, n, x, y);
+    });
+
+    let motion = gtk::GestureDrag::new();
+
+    motion.set_button(gtk::gdk::ffi::GDK_BUTTON_MIDDLE as u32);
+
+    motion.connect_drag_update(|g, x, y| {
+        println!("Gesture drag update");
+        println!("Details: {} {} {}", g, x, y);
+    });
+
+
+
+    //drawing_area.add_controller(gesture);
+    drawing_area.add_controller(motion);
+    
     // render on every frame
     DrawingAreaExtManual::set_draw_func(&drawing_area, |d, c, h, w| render_drawing_area(d, c, h, w));
 
