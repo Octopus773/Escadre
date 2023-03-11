@@ -21,10 +21,14 @@ impl NavalBoard {
         c.set_source_rgb(0.0, 0.0, 0.0);
         // draw lines for a naval battle board in a 10x10 grid
         // the board is viewed isometrically
+
+        let w = w as f64;
+        let h = h as f64;
+
         let num_lines = 10;
-        let step = ((w / 2 / num_lines) as f64, (h / 2 / num_lines) as f64);
-        let mut pos_start = (0., (h / 2) as f64);
-        let v = ((w / 2) as f64, (h / 2) as f64);
+        let step = ((w/ 2. / num_lines as f64) , (h / 2. / num_lines as f64));
+        let mut pos_start = (0., h / 2.);
+        let v = (w / 2., h / 2.);
 
         // draw the horizontal lines
         for _ in 0..=10 {
